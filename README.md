@@ -56,12 +56,6 @@ nginx     nginx:latest   "/docker-entrypoint.…"   nginx     4 hours ago   Up 1
 
 Go to http://127.0.0.1
 
-Output
-
-```
-Hello World
-```
-
 ### Restart docker container
 
 ```
