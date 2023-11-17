@@ -1,0 +1,29 @@
+version: '3'
+services:
+  api:
+    container_name: api
+    image: api:latest
+    build: ./api/
+    restart: unless-stopped
+    environment:
+      - DEBUG=True
+      - FLASK_DEBUG=1
+      - FLASK_ENV=development
+      - FLASK_APP=api:create_app()
+    volumes:
+      - ./api:/api
+      - ./data:/data
+    ports:
+      - '5001:5000'
+    command: ['flask', 'run', '--host=0.0.0.0']
+  nginx:
+    container_name: nginx
+    image: nginx:latest
+    build: ./nginx/
+    restart: unless-stopped
+    volumes:
+      - ./nginx/static:/static
+    environment:
+      - EXAMPLE01_VIRTUALHOST=${EXAMPLE01_VIRTUALHOST}
+    ports:
+      - '80:80'
